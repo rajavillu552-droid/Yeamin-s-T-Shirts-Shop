@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yeamin's Clothes - Brand T-Shirts</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fa;
+      padding: 15px;
+      color: #333;
+    }
+
+    .header-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      margin: 10px 0 20px 0;
+      color: #111;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* 2 Column Grid Layout */
+    .category-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Card Styling */
+    .category-card {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background-color: #e0e0e0;
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Overlay Styling */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 15px;
+      color: #fff;
+    }
+
+    .overlay h3 {
+      font-size: 13px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-align: center;
+      padding: 0 5px;
+    }
+
+    .shop-btn {
+      text-decoration: none;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 11px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* --- Modal Styling --- */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.85);
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      border-radius: 12px;
+      max-width: 480px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      padding: 20px;
+    }
+
+    /* Collection Items Grid Inside Modal */
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .item-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+      background: #fafafa;
+      padding-bottom: 10px;
+    }
+
+    .item-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+
+    .item-card h4 {
+      font-size: 12px;
+      margin: 8px 0 4px 0;
+      color: #222;
+    }
+
+    .item-card p {
+      font-size: 12px;
+      font-weight: bold;
+      color: #e63946;
+      margin-bottom: 8px;
+    }
+
+    .wp-btn {
+      display: inline-block;
+      background-color: #25D366;
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 11px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #333;
+      font-size: 26px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Footer Section */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #ffffff;
+      margin-top: 30px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #555;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    footer p {
+      margin-bottom: 6px;
+    }
+
+    footer a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact-info {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="header-title">BRAND T-SHIRTS</h1>
+
+  <div class="category-container">
+    
+    <!-- Item 1 -->
+    <div class="category-card">
+      <img src="https://images.pexels.com/photos/1656684/pexels-photo-1656684.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Graphic Tees">
+      <div class="overlay">
+        <h3>GRAPHIC TEES</h3>
+        <button class="shop-btn" onclick="openCollection('Graphic Tees')">Shop Now</button>
+      </div>
+    </div>
+
+    <!-- Item 2 -->
+    <div class="category-card">
+      <img src="https://images.pexels.com/photos/428340/pexels-photo-428340.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Casual Tees">
+      <div class="overlay">
+        <h3>CASUAL TEES</h3>
+        <button class="shop-btn" onclick="openCollection('Casual Tees')">Shop Now</button>
+      </div>
+    </div>
+
+    <!-- Item 3 -->
+    <div class="category-card">
+      <img src="https://images.pexels.com/photos/1018911/pexels-photo-1018911.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Oversized Shirts">
+      <div class="overlay">
+        <h3>OVERSIZED</h3>
+        <button class="shop-btn" onclick="openCollection('Oversized Shirts')">Shop Now</button>
+      </div>
+    </div>
+
+    <!-- Item 4 -->
+    <div class="category-card">
+      <img src="https://images.pexels.com/photos/2294342/pexels-photo-2294342.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Premium Tees">
+      <div class="overlay">
+        <h3>PREMIUM TEES</h3>
+        <button class="shop-btn" onclick="openCollection('Premium Tees')">Shop Now</button>
+      </div>
+    </div>
+
+    <!-- Item 5 -->
+    <div class="category-card">
+      <img src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vintage Edition">
+      <div class="overlay">
+        <h3>VINTAGE EDITION</h3>
+        <button class="shop-btn" onclick="openCollection('Vintage Edition')">Shop Now</button>
+      </div>
+    </div>
+
+    <!-- Item 6 -->
+    <div class="category-card">
+      <img src="https://images.pexels.com/photos/1566412/pexels-photo-1566412.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Minimalist Tees">
+      <div class="overlay">
+        <h3>MINIMALIST TEES</h3>
+        <button class="shop-btn" onclick="openCollection('Minimalist Tees')">Shop Now</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Collection Modal -->
+  <div id="collectionModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeCollection()">&times;</span>
+      <h2 id="collectionTitle" style="font-size: 16px; text-align: center; color: #111; text-transform: uppercase;">Collection</h2>
+      <div id="collectionItems" class="collection-grid">
+        <!-- Sub Collection Items dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Policy Popup Window -->
+  <div id="privacyModal" class="modal">
+    <div class="modal-content" style="text-align: left; max-height: 80vh; overflow-y: auto;">
+      <span class="close-btn" onclick="closePrivacyModal()">&times;</span>
+      <h2 style="margin-bottom: 15px; color: #111; text-align: center;">About Us & Privacy Policy</h2>
+      
+      <p style="font-size: 13px; color: #444; line-height: 1.6;">
+        Welcome to <strong>Yeamin's Clothes - Brand T-Shirts</strong>! We deliver high-quality, comfortable, and stylish t-shirts across <strong>Sylhet City (সিলেট শহর)</strong> and nationwide.
+      </p>
+      <br>
+
+      <h4 style="font-size: 14px; color: #222;">📞 Contact Us</h4>
+      <p style="font-size: 13px; color: #555; line-height: 1.6;">
+        <strong>Phone/WhatsApp:</strong> +8801753217083<br>
+        <strong>Email:</strong> khankulsuma29@gmail.com
+      </p>
+      <br>
+
+      <h4 style="font-size: 14px; color: #222;">📍 Service Area & Delivery</h4>
+      <p style="font-size: 13px; color: #555; line-height: 1.5;">
+        Fast and reliable cash-on-delivery service in Sylhet City.
+      </p>
+      <br>
+
+      <button onclick="closePrivacyModal()" style="background: #111; color: #fff; border: none; padding: 8px 18px; border-radius: 5px; cursor: pointer; float: right;">Close</button>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>© Yeamin's Clothes - Brand T-Shirts. All Rights Reserved.</p>
+    <a href="#" onclick="openPrivacyModal()">Privacy Policy & About Us</a>
+    
+    <div class="contact-info">
+      <p><strong>Contact Us:</strong> +8801753217083</p>
+      <p><strong>Email:</strong> khankulsuma29@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    const myWhatsAppNumber = "8801753217083";
+
+    /**
+     * @type {Record<string, Array<{name: string, price: string, img: string}>>}
+     */
+    const productsData = {
+      'Graphic Tees': [
+        { name: 'Anime Print Black', price: '৳450', img: 'https://images.pexels.com/photos/1656684/pexels-photo-1656684.jpeg?auto=compress&cs=tinysrgb&w=400' },
+        { name: 'Urban Graphic White', price: '৳480', img: 'https://images.pexels.com/photos/2294342/pexels-photo-2294342.jpeg?auto=compress&cs=tinysrgb&w=400' },
+        { name: 'Vintage Art Tee', price: '৳500', img: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400' },
+        { name: 'Typography Special', price: '৳460', img: 'https://images.pexels.com/photos/1018911/pexels-photo-1018911.jpeg?auto=compress&cs=tinysrgb&w=400' }
+      ],
+      'Casual Tees': [
+        { name: 'Basic Navy Blue', price: '৳350', img: 'https://images.pexels.com/photos/428340/pexels-photo-428340.jpeg?auto=compress&cs=tinysrgb&w=400' },
+        { name: 'Solid Black Casual', price: '৳380', img: 'https://images.pexels.com/photos/1566412/pexels-photo-1566412.jpeg?auto=compress&cs=tinysrgb&w=400' },
+        { name: 'Olive Green Everyday', price: '৳390', img: 'https://images.pexels.com/photos/2294342/pexels-photo-2294342.jpeg?auto=compress&cs=tinysrgb&w=400' }
+      ],
+      'Oversized Shirts': [
+        { name: 'Drop Shoulder Heavy Cotton', price: '৳550', img: 'https://images.pexels.com/photos/1018911/pexels-photo-1018911.jpeg?auto=compress&cs=tinysrgb&w=400' },
+        { name: 'Streetwear Oversized White', price: '৳580', img: 'https://images.pexels.com/photos/1656684/pexels-photo-1656684.jpeg?auto=compress&cs=tinysrgb&w=400' }
+      ],
+      'Premium Tees': [
+        { name: 'Comb Cotton Premium Black', price: '৳650', img: 'https://images.pexels.com/photos/2294342/pexels-photo-2294342.jpeg?auto=compress&cs=tinysrgb&w=400' },
+        { name: 'Luxury Soft Touch Maroon', price: '৳700', img: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400' }
+      ],
+      'Vintage Edition': [
+        { name: 'Retro 90s Style Tee', price: '৳520', img: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400' }
+      ],
+      'Minimalist Tees': [
+        { name: 'Clean White Minimalist', price: '৳400', img: 'https://images.pexels.com/photos/1566412/pexels-photo-1566412.jpeg?auto=compress&cs=tinysrgb&w=400' }
+      ]
+    };
+
+    /**
+     * @param {string} category
+     */
+    function openCollection(category) {
+      const titleElem = document.getElementById('collectionTitle');
+      if (titleElem) {
+        titleElem.innerText = category;
+      }
+
+      const container = document.getElementById('collectionItems');
+      if (container) {
+        container.innerHTML = '';
+      }
+
+      const items = productsData[category] || [];
+      
+      /**
+       * @param {{name: string, price: string, img: string}} item
+       */
+      items.forEach(function (item) {
+        const message = encodeURIComponent(`Hello! I want to order this product: ${item.name} (${category}) - Price: ${item.price}`);
+        const wpUrl = `https://wa.me/${myWhatsAppNumber}?text=${message}`;
+
+        if (container) {
+          container.innerHTML += `
+            <div class="item-card">
+              <img src="${item.img}" alt="${item.name}">
+              <h4>${item.name}</h4>
+              <p>${item.price}</p>
+              <a href="${wpUrl}" target="_blank" class="wp-btn">Order via WhatsApp</a>
+            </div>
+          `;
+        }
+      });
+
+      const modal = document.getElementById('collectionModal');
+      if (modal) {
+        modal.style.display = 'flex';
+      }
+    }
+
+    function closeCollection() {
+      const modal = document.getElementById('collectionModal');
+      if (modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    function openPrivacyModal() {
+      const modal = document.getElementById('privacyModal');
+      if (modal) {
+        modal.style.display = 'flex';
+      }
+    }
+
+    function closePrivacyModal() {
+      const modal = document.getElementById('privacyModal');
+      if (modal) {
+        modal.style.display = 'none';
+      }
+    }
+  </script>
+
+</body>
+</html>
