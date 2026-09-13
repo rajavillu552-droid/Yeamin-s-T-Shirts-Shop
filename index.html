@@ -3,98 +3,245 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yeamin's Clothes - Brand T-Shirts</title>
+  <title>PREMIUM ESSENTIALS</title>
   <style>
+    :root {
+      --bg-color: #f7f7f7;
+      --card-bg: #ffffff;
+      --card-inner: #f2f2f2;
+      --text-main: #111111;
+      --text-muted: #777777;
+      --accent-color: #96613b;
+      --btn-bg: #111111;
+      --btn-text: #ffffff;
+      --dark-footer: #1c1c1c;
+      --border-color: #e5e5e5;
+    }
+
+    body.dark-mode {
+      --bg-color: #121212;
+      --card-bg: #1e1e1e;
+      --card-inner: #252525;
+      --text-main: #ffffff;
+      --text-muted: #aaaaaa;
+      --accent-color: #b87b4d;
+      --btn-bg: #ffffff;
+      --btn-text: #111111;
+      --dark-footer: #0a0a0a;
+      --border-color: #333333;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     body {
-      background-color: #f8f9fa;
-      padding: 15px;
-      color: #333;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding-bottom: 20px;
     }
 
-    .header-title {
-      text-align: center;
-      font-size: 22px;
-      font-weight: 800;
-      margin: 10px 0 20px 0;
-      color: #111;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    /* 2 Column Grid Layout */
-    .category-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Card Styling */
-    .category-card {
-      position: relative;
-      width: 100%;
-      height: 220px;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      background-color: #e0e0e0;
-    }
-
-    .category-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Overlay Styling */
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0) 100%);
+    header {
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
-      padding-bottom: 15px;
-      color: #fff;
+      padding: 15px 20px;
+      background: var(--bg-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    .overlay h3 {
-      font-size: 13px;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
+    .brand-logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      font-weight: bold;
-      text-align: center;
-      padding: 0 5px;
+      color: var(--text-main);
     }
 
-    .shop-btn {
-      text-decoration: none;
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      padding: 6px 16px;
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
       border-radius: 20px;
-      font-size: 11px;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(4px);
       cursor: pointer;
+      color: var(--text-main);
+      font-size: 12px;
       font-weight: 600;
     }
 
-    /* --- Modal Styling --- */
+    .page-title-section {
+      padding: 10px 20px 15px 20px;
+    }
+
+    .page-title-section h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--text-main);
+      letter-spacing: 0.5px;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      padding: 0 20px 15px 20px;
+    }
+
+    .filter-bar input, .filter-bar select {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+    }
+
+    .category-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 0 20px 20px 20px;
+      scrollbar-width: none;
+    }
+
+    .category-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-btn {
+      white-space: nowrap;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .cat-btn.active {
+      background: var(--text-main);
+      color: var(--bg-color);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      padding: 0 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .image-wrapper {
+      width: 100%;
+      height: 190px;
+      border-radius: 12px;
+      background: var(--card-inner);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .brand-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .product-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-main);
+      line-height: 1.3;
+      margin-bottom: 6px;
+      height: 32px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .current-price {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .original-price {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .order-now-btn {
+      width: 100%;
+      padding: 9px 0;
+      background: var(--btn-bg);
+      color: var(--btn-text);
+      border: none;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .order-now-btn:active {
+      transform: scale(0.98);
+    }
+
     .modal {
       display: none;
       position: fixed;
@@ -103,318 +250,614 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.75);
       justify-content: center;
       align-items: center;
-      padding: 15px;
+      padding: 20px;
+      backdrop-filter: blur(4px);
     }
 
     .modal-content {
-      background-color: #fff;
-      border-radius: 12px;
-      max-width: 480px;
+      background: var(--bg-color);
+      padding: 24px;
+      border-radius: 16px;
+      max-width: 450px;
       width: 100%;
-      max-height: 85vh;
+      max-height: 80vh;
       overflow-y: auto;
       position: relative;
-      padding: 20px;
-    }
-
-    /* Collection Items Grid Inside Modal */
-    .collection-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 15px;
-    }
-
-    .item-card {
-      border: 1px solid #eee;
-      border-radius: 8px;
-      overflow: hidden;
-      text-align: center;
-      background: #fafafa;
-      padding-bottom: 10px;
-    }
-
-    .item-card img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-    }
-
-    .item-card h4 {
-      font-size: 12px;
-      margin: 8px 0 4px 0;
-      color: #222;
-    }
-
-    .item-card p {
-      font-size: 12px;
-      font-weight: bold;
-      color: #e63946;
-      margin-bottom: 8px;
-    }
-
-    .wp-btn {
-      display: inline-block;
-      background-color: #25D366;
-      color: white;
-      text-decoration: none;
-      padding: 6px 12px;
-      border-radius: 15px;
-      font-weight: bold;
-      font-size: 11px;
     }
 
     .close-btn {
       position: absolute;
-      top: 10px;
+      top: 15px;
       right: 15px;
-      color: #333;
-      font-size: 26px;
-      font-weight: bold;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    .order-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .order-form input, .order-form select, .order-form textarea {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: var(--card-bg);
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+    }
+
+    .confirm-btn {
+      background: var(--text-main);
+      color: var(--bg-color);
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 5px;
+    }
+
+    .policy-body {
+      margin-top: 15px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-main);
+    }
+
+    .policy-body h4 {
+      margin-top: 12px;
+      margin-bottom: 4px;
+      font-size: 14px;
+      color: var(--accent-color);
+    }
+
+    .policy-body ul {
+      padding-left: 18px;
+      margin-bottom: 10px;
+    }
+
+    .whatsapp-float {
+      position: fixed !important;
+      bottom: 24px !important;
+      right: 24px !important;
+      width: 56px;
+      height: 56px;
+      background-color: #25d366;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+      z-index: 99999 !important;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    .whatsapp-float svg {
+      width: 32px;
+      height: 32px;
+      fill: #ffffff;
+    }
+
+    footer {
+      background: var(--dark-footer);
+      color: #ffffff;
+      padding: 35px 20px;
+      margin-top: 40px;
+    }
+
+    .footer-section {
+      margin-bottom: 25px;
+    }
+
+    .footer-section h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .footer-section p {
+      font-size: 13px;
+      color: #aaaaaa;
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 8px;
+    }
+
+    .footer-links a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
       cursor: pointer;
     }
 
-    /* Footer Section */
-    footer {
-      text-align: center;
-      padding: 20px;
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .newsletter-box {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .newsletter-box input {
+      padding: 12px 16px;
+      border-radius: 25px;
+      border: none;
       background: #ffffff;
-      margin-top: 30px;
-      border-radius: 8px;
-      font-size: 12px;
-      color: #555;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      color: #000000;
+      font-size: 13px;
+      outline: none;
     }
 
-    footer p {
-      margin-bottom: 6px;
-    }
-
-    footer a {
-      color: #007bff;
-      text-decoration: none;
+    .newsletter-box button {
+      padding: 12px;
+      border-radius: 25px;
+      border: none;
+      background: var(--accent-color);
+      color: #ffffff;
       font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
     }
 
-    .contact-info {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid #eee;
-      line-height: 1.6;
+    .social-icons {
+      display: flex;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .social-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #333333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 11px;
+      color: #777777;
+      margin-top: 30px;
+      border-top: 1px solid #333333;
+      padding-top: 15px;
     }
   </style>
 </head>
 <body>
 
-  <h1 class="header-title">BRAND T-SHIRTS</h1>
+  <header>
+    <div class="brand-logo">PREMIUM ESSENTIALS</div>
+    <button class="theme-toggle" onclick="toggleDarkMode()">🌙 Theme</button>
+  </header>
 
-  <div class="category-container">
-    
-    <!-- Item 1 -->
-    <div class="category-card">
-      <img src="https://images.pexels.com/photos/1656684/pexels-photo-1656684.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Graphic Tees">
-      <div class="overlay">
-        <h3>GRAPHIC TEES</h3>
-        <button class="shop-btn" onclick="openCollection('Graphic Tees')">Shop Now</button>
-      </div>
-    </div>
-
-    <!-- Item 2 -->
-    <div class="category-card">
-      <img src="https://images.pexels.com/photos/428340/pexels-photo-428340.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Casual Tees">
-      <div class="overlay">
-        <h3>CASUAL TEES</h3>
-        <button class="shop-btn" onclick="openCollection('Casual Tees')">Shop Now</button>
-      </div>
-    </div>
-
-    <!-- Item 3 -->
-    <div class="category-card">
-      <img src="https://images.pexels.com/photos/1018911/pexels-photo-1018911.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Oversized Shirts">
-      <div class="overlay">
-        <h3>OVERSIZED</h3>
-        <button class="shop-btn" onclick="openCollection('Oversized Shirts')">Shop Now</button>
-      </div>
-    </div>
-
-    <!-- Item 4 -->
-    <div class="category-card">
-      <img src="https://images.pexels.com/photos/2294342/pexels-photo-2294342.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Premium Tees">
-      <div class="overlay">
-        <h3>PREMIUM TEES</h3>
-        <button class="shop-btn" onclick="openCollection('Premium Tees')">Shop Now</button>
-      </div>
-    </div>
-
-    <!-- Item 5 -->
-    <div class="category-card">
-      <img src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Vintage Edition">
-      <div class="overlay">
-        <h3>VINTAGE EDITION</h3>
-        <button class="shop-btn" onclick="openCollection('Vintage Edition')">Shop Now</button>
-      </div>
-    </div>
-
-    <!-- Item 6 -->
-    <div class="category-card">
-      <img src="https://images.pexels.com/photos/1566412/pexels-photo-1566412.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Minimalist Tees">
-      <div class="overlay">
-        <h3>MINIMALIST TEES</h3>
-        <button class="shop-btn" onclick="openCollection('Minimalist Tees')">Shop Now</button>
-      </div>
-    </div>
-
+  <div class="page-title-section">
+    <h1>Products</h1>
   </div>
 
-  <!-- Collection Modal -->
-  <div id="collectionModal" class="modal">
+  <div class="filter-bar">
+    <input type="text" id="searchInput" placeholder="Search products...">
+    <select id="priceFilter">
+      <option value="all">All Prices</option>
+      <option value="under2000">Under Tk 2,000</option>
+      <option value="above2000">Tk 2,000 & Above</option>
+    </select>
+  </div>
+
+  <div class="category-scroll" id="categoryScroll">
+    <button class="cat-btn active" onclick="window.selectCategory('All', this)">All</button>
+    <button class="cat-btn" onclick="window.selectCategory('Backpacks', this)">Backpacks</button>
+    <button class="cat-btn" onclick="window.selectCategory('T-Shirts', this)">T-Shirts</button>
+    <button class="cat-btn" onclick="window.selectCategory('Watches', this)">Watches</button>
+    <button class="cat-btn" onclick="window.selectCategory('Money Bags', this)">Money Bags</button>
+  </div>
+
+  <div class="product-grid" id="productGrid"></div>
+
+  <a href="https://wa.me/8801753217083" target="_blank" class="whatsapp-float" title="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32">
+      <path d="M16 2A13 13 0 0 0 4.68 20.87L3 27.08l6.38-1.63A12.94 12.94 0 0 0 16 28a13 13 0 0 0 0-26zm0 23.77a10.74 10.74 0 0 1-5.48-1.5l-.39-.23-4.07 1 1.07-3.92-.25-.4A10.77 10.77 0 1 1 16 25.77zm5.91-8c-.32-.16-1.92-.95-2.22-1.06s-.51-.16-.73.16-.84 1.06-1.03 1.28-.38.25-.7.09a8.84 8.84 0 0 1-2.6-1.6 9.77 9.77 0 0 1-1.8-2.24c-.19-.32 0-.49.14-.65s.32-.38.48-.56a2.22 2.22 0 0 0 .32-.53.59.59 0 0 0 0-.56c0-.16-.73-1.76-1-2.41s-.58-.54-.79-.55h-.68a1.31 1.31 0 0 0-.95.44 3.99 3.99 0 0 0-1.25 3 6.94 6.94 0 0 0 1.45 3.66 15.86 15.86 0 0 0 6.09 5.37c2.16.94 2.97.94 4.07.78a3.46 3.46 0 0 0 2.29-1.62 2.82 2.82 0 0 0 .2-1.62c-.09-.16-.32-.24-.64-.4z"/>
+    </svg>
+  </a>
+
+  <!-- Order Modal -->
+  <div id="orderModal" class="modal">
     <div class="modal-content">
-      <span class="close-btn" onclick="closeCollection()">&times;</span>
-      <h2 id="collectionTitle" style="font-size: 16px; text-align: center; color: #111; text-transform: uppercase;">Collection</h2>
-      <div id="collectionItems" class="collection-grid">
-        <!-- Sub Collection Items dynamically inserted here -->
+      <span class="close-btn" onclick="window.closeOrderModal()">&times;</span>
+      <h3 style="text-transform: uppercase; font-size: 16px;" id="modalProductName">Checkout</h3>
+      <p id="modalProductPrice" style="color: var(--accent-color); font-weight: bold; margin-top: 4px; font-size: 14px;"></p>
+      
+      <form class="order-form" id="orderForm">
+        <input type="text" id="custName" placeholder="Your Name" required>
+        <input type="tel" id="custPhone" placeholder="Phone Number" required>
+        <select id="custSize">
+          <option value="Standard">Standard Size</option>
+          <option value="M">Medium (M)</option>
+          <option value="L">Large (L)</option>
+          <option value="XL">Extra Large (XL)</option>
+        </select>
+        <textarea id="custAddress" rows="2" placeholder="Delivery Address" required></textarea>
+        <button type="submit" class="confirm-btn">Confirm Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Policy Modal -->
+  <div id="policyModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="window.closePolicyModal()">&times;</span>
+      <h3 id="policyModalTitle" style="text-transform: uppercase; font-size: 16px;">Policy</h3>
+      <div id="policyModalBody" class="policy-body"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-section">
+      <h3>About Us</h3>
+      <p>Designed for individuals who move with purpose. Premium Essentials brings together clean aesthetics, everyday function, and detail-focused products made to elevate daily carry.</p>
+    </div>
+
+    <div class="footer-section">
+      <h3>Policies</h3>
+      <ul class="footer-links">
+        <li><a onclick="window.openPolicyModal('shipping')">Shipping Policy</a></li>
+        <li><a onclick="window.openPolicyModal('return')">Return & Refund Policy</a></li>
+        <li><a onclick="window.openPolicyModal('privacy')">Privacy Policy</a></li>
+        <li><a onclick="window.openPolicyModal('terms')">Terms of Service</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>Subscribe to Our Newsletter</h3>
+      <div class="newsletter-box">
+        <input type="email" placeholder="Enter your email">
+        <button type="button">Subscribe</button>
+      </div>
+      <div class="social-icons">
+        <a href="#" class="social-icon">f</a>
+        <a href="#" class="social-icon">📷</a>
+        <a href="#" class="social-icon">🎵</a>
       </div>
     </div>
-  </div>
 
-  <!-- Privacy Policy Popup Window -->
-  <div id="privacyModal" class="modal">
-    <div class="modal-content" style="text-align: left; max-height: 80vh; overflow-y: auto;">
-      <span class="close-btn" onclick="closePrivacyModal()">&times;</span>
-      <h2 style="margin-bottom: 15px; color: #111; text-align: center;">About Us & Privacy Policy</h2>
-      
-      <p style="font-size: 13px; color: #444; line-height: 1.6;">
-        Welcome to <strong>Yeamin's Clothes - Brand T-Shirts</strong>! We deliver high-quality, comfortable, and stylish t-shirts across <strong>Sylhet City (সিলেট শহর)</strong> and nationwide.
-      </p>
-      <br>
-
-      <h4 style="font-size: 14px; color: #222;">📞 Contact Us</h4>
-      <p style="font-size: 13px; color: #555; line-height: 1.6;">
-        <strong>Phone/WhatsApp:</strong> +8801753217083<br>
-        <strong>Email:</strong> khankulsuma29@gmail.com
-      </p>
-      <br>
-
-      <h4 style="font-size: 14px; color: #222;">📍 Service Area & Delivery</h4>
-      <p style="font-size: 13px; color: #555; line-height: 1.5;">
-        Fast and reliable cash-on-delivery service in Sylhet City.
-      </p>
-      <br>
-
-      <button onclick="closePrivacyModal()" style="background: #111; color: #fff; border: none; padding: 8px 18px; border-radius: 5px; cursor: pointer; float: right;">Close</button>
-    </div>
-  </div>
-
-  <!-- Footer Section -->
-  <footer>
-    <p>© Yeamin's Clothes - Brand T-Shirts. All Rights Reserved.</p>
-    <a href="#" onclick="openPrivacyModal()">Privacy Policy & About Us</a>
-    
-    <div class="contact-info">
-      <p><strong>Contact Us:</strong> +8801753217083</p>
-      <p><strong>Email:</strong> khankulsuma29@gmail.com</p>
+    <div class="copyright">
+      © 2026 Premium Essentials. All Rights Reserved.
     </div>
   </footer>
 
   <script>
+    /**
+     * @typedef {Object} Product
+     * @property {number} id
+     * @property {string} name
+     * @property {string} category
+     * @property {number} price
+     * @property {number} oldPrice
+     * @property {string} image
+     */
+
     const myWhatsAppNumber = "8801753217083";
 
-    /**
-     * @type {Record<string, Array<{name: string, price: string, img: string}>>}
-     */
-    const productsData = {
-      'Graphic Tees': [
-        { name: 'Anime Print Black', price: '৳450', img: 'https://images.pexels.com/photos/1656684/pexels-photo-1656684.jpeg?auto=compress&cs=tinysrgb&w=400' },
-        { name: 'Urban Graphic White', price: '৳480', img: 'https://images.pexels.com/photos/2294342/pexels-photo-2294342.jpeg?auto=compress&cs=tinysrgb&w=400' },
-        { name: 'Vintage Art Tee', price: '৳500', img: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400' },
-        { name: 'Typography Special', price: '৳460', img: 'https://images.pexels.com/photos/1018911/pexels-photo-1018911.jpeg?auto=compress&cs=tinysrgb&w=400' }
+    /** @type {Record<string, string[]>} */
+    const categoryImages = {
+      "Backpacks": [
+        "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1546938576-6e6a64f317cc?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1577733966973-d680bffd2e80?auto=format&fit=crop&w=600&q=80"
       ],
-      'Casual Tees': [
-        { name: 'Basic Navy Blue', price: '৳350', img: 'https://images.pexels.com/photos/428340/pexels-photo-428340.jpeg?auto=compress&cs=tinysrgb&w=400' },
-        { name: 'Solid Black Casual', price: '৳380', img: 'https://images.pexels.com/photos/1566412/pexels-photo-1566412.jpeg?auto=compress&cs=tinysrgb&w=400' },
-        { name: 'Olive Green Everyday', price: '৳390', img: 'https://images.pexels.com/photos/2294342/pexels-photo-2294342.jpeg?auto=compress&cs=tinysrgb&w=400' }
+      "T-Shirts": [
+        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=600&q=80"
       ],
-      'Oversized Shirts': [
-        { name: 'Drop Shoulder Heavy Cotton', price: '৳550', img: 'https://images.pexels.com/photos/1018911/pexels-photo-1018911.jpeg?auto=compress&cs=tinysrgb&w=400' },
-        { name: 'Streetwear Oversized White', price: '৳580', img: 'https://images.pexels.com/photos/1656684/pexels-photo-1656684.jpeg?auto=compress&cs=tinysrgb&w=400' }
+      "Watches": [
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1539874754764-5a96559165b0?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80"
       ],
-      'Premium Tees': [
-        { name: 'Comb Cotton Premium Black', price: '৳650', img: 'https://images.pexels.com/photos/2294342/pexels-photo-2294342.jpeg?auto=compress&cs=tinysrgb&w=400' },
-        { name: 'Luxury Soft Touch Maroon', price: '৳700', img: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400' }
-      ],
-      'Vintage Edition': [
-        { name: 'Retro 90s Style Tee', price: '৳520', img: 'https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg?auto=compress&cs=tinysrgb&w=400' }
-      ],
-      'Minimalist Tees': [
-        { name: 'Clean White Minimalist', price: '৳400', img: 'https://images.pexels.com/photos/1566412/pexels-photo-1566412.jpeg?auto=compress&cs=tinysrgb&w=400' }
+      "Money Bags": [
+        "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1606503153255-59d8b8b82176?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1614315517650-3771cf72d18a?auto=format&fit=crop&w=600&q=80"
       ]
     };
 
+    /** @type {Record<string, {title: string, content: string}>} */
+    const policyData = {
+      shipping: {
+        title: "Shipping & Delivery Policy",
+        content: `
+          <h4>ডেলিভারি এলাকা ও সময়সীমা:</h4>
+          <ul>
+            <li>সিলেট সিটির ভেতরে: ২৪ থেকে ৪৮ ঘণ্টা।</li>
+            <li>সিলেটের বাইরে (সারাদেশে): ২ থেকে ৪ কর্মদিবস।</li>
+          </ul>
+          <h4>ডেলিভারি চার্জ:</h4>
+          <ul>
+            <li>সিলেট সিটির ভেতরে: ৳৬০/৮০ টাকা।</li>
+            <li>সিলেটের বাইরে: ৳১৩০/১৫০ টাকা।</li>
+          </ul>
+          <h4>জরুরি পরিস্থিতি:</h4>
+          <p>আবহাওয়া বা কোনো বিশেষ পরিস্থিতির কারণে ডেলিভারিতে সময় বেশি লাগলে কাস্টমারকে তাৎক্ষণিক অবগত করা হবে।</p>
+        `
+      },
+      return: {
+        title: "Return & Refund Policy",
+        content: `
+          <h4>রিটার্নের সময়সীমা:</h4>
+          <p>পণ্য গ্রহণের সময় সিলেট সিটির গ্রাহকরা ডেলিভারি ম্যানের সামনে প্রোডাক্ট চেক করতে পারবেন। অন্যথায় ২৪ ঘণ্টার মধ্যে আমাদের মেসেজ বা হোয়াটসঅ্যাপে জানাতে হবে।</p>
+          <h4>যেসব ক্ষেত্রে ফেরত নেওয়া হয়:</h4>
+          <ul>
+            <li>ত্রুটিপূর্ণ বা ড্যামেজ পণ্য পেলে।</li>
+            <li>অর্ডারের পণ্যের সাথে মিল না থাকলে (সাইজ/কালার)।</li>
+          </ul>
+          <h4>রিফান্ড প্রক্রিয়া:</h4>
+          <p>রিটার্ন পাওয়ার পর ৩ থেকে ৭ কর্মদিবসের মধ্যে বিকাশ বা নগদের মাধ্যমে টাকা ফেরত দেওয়া হবে।</p>
+        `
+      },
+      privacy: {
+        title: "Privacy Policy",
+        content: `
+          <h4>তথ্য সংগ্রহ ও ব্যবহার:</h4>
+          <p>আপনার অর্ডার প্রসেসিং ও সিলেটের ঠিকানা অনুযায়ী সঠিক ডেলিভারির উদ্দেশ্যে কেবল আপনার নাম, মোবাইল নম্বর এবং ঠিকানা সংরক্ষণ করা হয়।</p>
+          <h4>তৃতীয় পক্ষ (Third-Party):</h4>
+          <p>ডেলিভারি পার্টনার কুরিয়ার সার্ভিস ব্যতীত অন্য কোনো ব্যক্তির কাছে আপনার তথ্য প্রকাশ করা হবে না।</p>
+          <h4>ডাটা সুরক্ষা:</h4>
+          <p>আপনার ব্যক্তিগত তথ্য আমাদের কাছে নিরাপদ ও সংরক্ষিত।</p>
+        `
+      },
+      terms: {
+        title: "Terms of Service",
+        content: `
+          <h4>অর্ডার নিশ্চিতকরণ:</h4>
+          <p>ওয়েবসাইটে প্রাপ্ত অর্ডারের পর আমাদের টিম ফোন বা হোয়াটসঅ্যাপ মারফত কনফার্ম করবে।</p>
+          <h4>মূল্য ও সার্ভিস:</h4>
+          <p>যেকোনো সময় পণ্যের অফার বা দাম পরিবর্তনের অধিকার সংরক্ষিত।</p>
+          <h4>ভুল ঠিকানা:</h4>
+          <p>ডেলিভারি ফর্ম পূরণ করার সময় সঠিক সিলেট এলাকার ঠিকানা প্রদান নিশ্চিত করুন।</p>
+        `
+      }
+    };
+
+    /** @type {Product[]} */
+    const products = [];
+    let idCounter = 1;
+
+    const categories = ["Backpacks", "T-Shirts", "Watches", "Money Bags"];
+
     /**
-     * @param {string} category
+     * @param {string} cat
      */
-    function openCollection(category) {
-      const titleElem = document.getElementById('collectionTitle');
-      if (titleElem) {
-        titleElem.innerText = category;
+    function createCategoryProducts(cat) {
+      const imgs = categoryImages[cat];
+      for (let i = 1; i <= 50; i++) {
+        const img = imgs[i % imgs.length];
+        const price = 850 + (i * 45) % 2500;
+        const oldPrice = price + 400;
+        
+        let pName = "";
+        if (cat === "Backpacks") pName = `Premium Utility Backpack Vol. ${i}`;
+        else if (cat === "T-Shirts") pName = `Essential Heavyweight Tee Edition ${i}`;
+        else if (cat === "Watches") pName = `Luxury Chrono Series #${i}`;
+        else if (cat === "Money Bags") pName = `Slim Leather Wallet Custom ${i}`;
+
+        products.push({
+          id: idCounter++,
+          name: pName,
+          category: cat,
+          price: price,
+          oldPrice: oldPrice,
+          image: img
+        });
       }
+    }
 
-      const container = document.getElementById('collectionItems');
-      if (container) {
-        container.innerHTML = '';
-      }
+    categories.forEach(createCategoryProducts);
 
-      const items = productsData[category] || [];
-      
-      /**
-       * @param {{name: string, price: string, img: string}} item
-       */
-      items.forEach(function (item) {
-        const message = encodeURIComponent(`Hello! I want to order this product: ${item.name} (${category}) - Price: ${item.price}`);
-        const wpUrl = `https://wa.me/${myWhatsAppNumber}?text=${message}`;
+    let currentCategory = "All";
+    /** @type {Product | null} */
+    let selectedProduct = null;
 
-        if (container) {
-          container.innerHTML += `
-            <div class="item-card">
-              <img src="${item.img}" alt="${item.name}">
-              <h4>${item.name}</h4>
-              <p>${item.price}</p>
-              <a href="${wpUrl}" target="_blank" class="wp-btn">Order via WhatsApp</a>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    /**
+     * @param {number} productId
+     */
+    function openOrderModal(productId) {
+      const found = products.find(function(p) { return p.id === productId; });
+      if (!found) return;
+      selectedProduct = found;
+
+      const nameElem = document.getElementById('modalProductName');
+      const priceElem = document.getElementById('modalProductPrice');
+      const modalElem = document.getElementById('orderModal');
+
+      if (nameElem) nameElem.innerText = selectedProduct.name;
+      if (priceElem) priceElem.innerText = `Tk ${selectedProduct.price.toLocaleString()}`;
+      if (modalElem) modalElem.style.display = 'flex';
+    }
+
+    function closeOrderModal() {
+      const modalElem = document.getElementById('orderModal');
+      if (modalElem) modalElem.style.display = 'none';
+    }
+
+    /**
+     * @param {string} type
+     */
+    function openPolicyModal(type) {
+      const p = policyData[type];
+      if (!p) return;
+
+      const titleElem = document.getElementById('policyModalTitle');
+      const bodyElem = document.getElementById('policyModalBody');
+      const modalElem = document.getElementById('policyModal');
+
+      if (titleElem) titleElem.innerText = p.title;
+      if (bodyElem) bodyElem.innerHTML = p.content;
+      if (modalElem) modalElem.style.display = 'flex';
+    }
+
+    function closePolicyModal() {
+      const modalElem = document.getElementById('policyModal');
+      if (modalElem) modalElem.style.display = 'none';
+    }
+
+    // Attach functions to global scope
+    window['openOrderModal'] = openOrderModal;
+    window['closeOrderModal'] = closeOrderModal;
+    window['openPolicyModal'] = openPolicyModal;
+    window['closePolicyModal'] = closePolicyModal;
+
+    /**
+     * @param {Product[]} items
+     */
+    function renderProducts(items) {
+      const grid = document.getElementById('productGrid');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      items.forEach(function(item) {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div>
+            <div class="image-wrapper">
+              <img src="${item.image}" alt="${item.name}">
             </div>
-          `;
-        }
+            <div class="card-meta">
+              <span class="brand-tag">ESSENTIALS</span>
+            </div>
+            <div class="product-title">${item.name}</div>
+            <div class="price-row">
+              <span class="current-price">Tk ${item.price.toLocaleString()}</span>
+              <span class="original-price">Tk ${item.oldPrice.toLocaleString()}</span>
+            </div>
+          </div>
+          <button class="order-now-btn" onclick="window.openOrderModal(${item.id})">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            Order Now
+          </button>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function applyFilters() {
+      const searchElem = /** @type {HTMLInputElement | null} */ (document.getElementById('searchInput'));
+      const priceElem = /** @type {HTMLSelectElement | null} */ (document.getElementById('priceFilter'));
+      
+      const query = searchElem ? searchElem.value.toLowerCase() : '';
+      const priceVal = priceElem ? priceElem.value : 'all';
+
+      const filtered = products.filter(function(p) {
+        const matchesCategory = currentCategory === 'All' || p.category === currentCategory;
+        const matchesSearch = p.name.toLowerCase().includes(query);
+        let matchesPrice = true;
+        if (priceVal === 'under2000') matchesPrice = p.price < 2000;
+        if (priceVal === 'above2000') matchesPrice = p.price >= 2000;
+
+        return matchesCategory && matchesSearch && matchesPrice;
       });
 
-      const modal = document.getElementById('collectionModal');
-      if (modal) {
-        modal.style.display = 'flex';
-      }
+      renderProducts(filtered);
     }
 
-    function closeCollection() {
-      const modal = document.getElementById('collectionModal');
-      if (modal) {
-        modal.style.display = 'none';
-      }
+    /**
+     * @param {string} categoryName
+     * @param {HTMLElement} btnElement
+     */
+    function selectCategory(categoryName, btnElement) {
+      currentCategory = categoryName;
+      const buttons = document.querySelectorAll('.cat-btn');
+      buttons.forEach(function(btn) { btn.classList.remove('active'); });
+      if (btnElement) btnElement.classList.add('active');
+      applyFilters();
     }
 
-    function openPrivacyModal() {
-      const modal = document.getElementById('privacyModal');
-      if (modal) {
-        modal.style.display = 'flex';
-      }
-    }
+    window['selectCategory'] = selectCategory;
 
-    function closePrivacyModal() {
-      const modal = document.getElementById('privacyModal');
-      if (modal) {
-        modal.style.display = 'none';
+    document.addEventListener('DOMContentLoaded', function() {
+      applyFilters();
+
+      const searchInput = document.getElementById('searchInput');
+      const priceFilter = document.getElementById('priceFilter');
+      const orderForm = document.getElementById('orderForm');
+
+      if (searchInput) searchInput.addEventListener('input', function() { applyFilters(); });
+      if (priceFilter) priceFilter.addEventListener('change', function() { applyFilters(); });
+
+      if (orderForm) {
+        orderForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          if (!selectedProduct) return;
+
+          const nameElem = /** @type {HTMLInputElement | null} */ (document.getElementById('custName'));
+          const phoneElem = /** @type {HTMLInputElement | null} */ (document.getElementById('custPhone'));
+          const sizeElem = /** @type {HTMLSelectElement | null} */ (document.getElementById('custSize'));
+          const addressElem = /** @type {HTMLTextAreaElement | null} */ (document.getElementById('custAddress'));
+
+          const nameVal = nameElem ? nameElem.value : '';
+          const phoneVal = phoneElem ? phoneElem.value : '';
+          const sizeVal = sizeElem ? sizeElem.value : '';
+          const addressVal = addressElem ? addressElem.value : '';
+
+          const textMessage = encodeURIComponent(
+            `🛒 NEW ORDER!\n\n` +
+            `📷 Image Link: ${selectedProduct.image}\n` +
+            `📌 Product: ${selectedProduct.name}\n` +
+            `💰 Price: Tk ${selectedProduct.price}\n` +
+            `📏 Size: ${sizeVal}\n\n` +
+            `👤 Customer Name: ${nameVal}\n` +
+            `📞 Phone: ${phoneVal}\n` +
+            `🏠 Address: ${addressVal}`
+          );
+
+          window.open(`https://wa.me/${myWhatsAppNumber}?text=${textMessage}`, '_blank');
+          closeOrderModal();
+        });
       }
-    }
+    });
   </script>
-
 </body>
-</html>
+  </html>
